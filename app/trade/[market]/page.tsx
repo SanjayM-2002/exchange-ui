@@ -1,6 +1,7 @@
 'use client';
 
 import { Depth } from '@/app/components/depth/Depth';
+import { SwapSection } from '@/app/components/SwapSection';
 import { TradeView } from '@/app/components/TradeView';
 import { useParams } from 'next/navigation';
 
@@ -34,8 +35,9 @@ export default function Page() {
           Depth section
           <Depth market={market as string} />
         </div>
-        <div>
-          <div className='flex flex-col w-auto bg-blue-200'>Swap section</div>
+
+        <div className='flex flex-col w-auto border-yellow-200 border-2'>
+          <SwapSection />
         </div>
       </div>
     </div>
