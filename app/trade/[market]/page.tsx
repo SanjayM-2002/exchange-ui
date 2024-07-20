@@ -1,6 +1,7 @@
 'use client';
 
 import { Depth } from '@/app/components/depth/Depth';
+import { TradeView } from '@/app/components/TradeView';
 import { useParams } from 'next/navigation';
 
 export default function Page() {
@@ -25,9 +26,11 @@ export default function Page() {
       <div className='flex flex-col flex-1 bg-yellow-200'>
         Marketbar section
       </div>
-      <div className='grid grid-cols-1 lg:grid-cols-3 border-y border-slate-800  h-auto'>
-        <div className='flex flex-col flex-1'>Tradeview section</div>
-        <div className='flex flex-col w-auto overflow-hidden '>
+      <div className='grid grid-cols-1 lg:grid-cols-[2.5fr_1fr_1fr] border-y border-slate-800 border-2  h-auto'>
+        <div className='flex flex-col flex-1 border-yellow-200 border-2'>
+          <TradeView market={market as string} />
+        </div>
+        <div className='flex flex-col w-auto overflow-hidden border-yellow-200 border-2'>
           Depth section
           <Depth market={market as string} />
         </div>
