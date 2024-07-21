@@ -1,13 +1,16 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { getKlines } from '../utils/httpClient';
 import { ChartManager } from '../utils/ChartManager';
 import { KLine } from '../utils/types';
+import Loader from './common/Loader';
 
 export function TradeView({ market }: { market: string }) {
   const chartRef = useRef<HTMLDivElement>(null);
   const chartManagerRef = useRef<ChartManager>(null);
+  const [isLoading, setIsLoading] = useState<Boolean>(false);
 
   const init = async () => {
+    setIsLoading(true);
     let klineData: KLine[] = [];
     try {
       klineData = await getKlines(
@@ -16,7 +19,11 @@ export function TradeView({ market }: { market: string }) {
         Math.floor((new Date().getTime() - 1000 * 60 * 60 * 24 * 7) / 1000),
         Math.floor(new Date().getTime() / 1000)
       );
-    } catch (e) {}
+    } catch (e) {
+      console.log('error is: ', e);
+    } finally {
+      setIsLoading(false);
+    }
 
     if (chartRef) {
       if (chartManagerRef.current) {
@@ -46,6 +53,14 @@ export function TradeView({ market }: { market: string }) {
   useEffect(() => {
     init();
   }, [market, chartRef]);
+
+  if (isLoading) {
+    return (
+      <>
+        <Loader />
+      </>
+    );
+  }
 
   return (
     <>

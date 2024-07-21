@@ -1,6 +1,7 @@
 'use client';
 
 import { Depth } from '@/app/components/depth/Depth';
+import { Marketbar } from '@/app/components/Marketbar';
 import { SwapSection } from '@/app/components/SwapSection';
 import { TradeView } from '@/app/components/TradeView';
 import { useParams } from 'next/navigation';
@@ -24,8 +25,8 @@ export default function Page() {
       <div>
         <div className='flex flex-col w-[250px] bg-blue-200'>Swap section</div>
       </div> */}
-      <div className='flex flex-col flex-1 bg-yellow-200'>
-        Marketbar section
+      <div className='flex flex-col flex-1 border-yellow-200 border-2'>
+        <Marketbar market={market as string} />
       </div>
       <div className='grid grid-cols-1 lg:grid-cols-[2.5fr_1fr_1fr] border-y border-slate-800 border-2  h-auto'>
         <div className='flex flex-col flex-1 border-yellow-200 border-2'>
@@ -37,7 +38,7 @@ export default function Page() {
         </div>
 
         <div className='flex flex-col w-auto border-yellow-200 border-2'>
-          <SwapSection />
+          <SwapSection market={market as string} />
         </div>
       </div>
     </div>

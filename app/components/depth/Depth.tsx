@@ -9,14 +9,17 @@ import {
 } from '../../utils/httpClient';
 import { AskTable } from './AskTable';
 import { BidTable } from './BidTable';
+import Loader from '../common/Loader';
 
 export function Depth({ market }: { market: string }) {
   const [bids, setBids] = useState<[string, string][]>();
   const [asks, setAsks] = useState<[string, string][]>();
   const [price, setPrice] = useState<string>();
+  const [isLoading, setIsLoading] = useState<Boolean>(false);
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
       try {
         const depthData = await getDepth(market);
         setBids(depthData.bids.reverse());
@@ -33,11 +36,21 @@ export function Depth({ market }: { market: string }) {
         // setPrice(klinesData[0].close);
       } catch (error) {
         console.error('Error fetching data:', error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchData();
   }, [market]);
+
+  if (isLoading) {
+    return (
+      <>
+        <Loader />
+      </>
+    );
+  }
 
   return (
     <div>

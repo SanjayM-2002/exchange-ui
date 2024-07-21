@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 
-export function SwapSection() {
+export function SwapSection({ market }: { market: string }) {
   const [amount, setAmount] = useState('');
   const [activeTab, setActiveTab] = useState('buy');
   const [type, setType] = useState('limit');
@@ -46,7 +46,13 @@ export function SwapSection() {
                   />
                   <div className='flex flex-row absolute right-1 top-1 p-2'>
                     <div className='relative'>
-                      <img src='/usdc.webp' className='w-6 h-6' />
+                      <img
+                        src={`https://backpack.exchange/coins/${
+                          market.split('_')[1]
+                        }.svg`}
+                        alt={`${market.split('_')[1]} logo`}
+                        className='w-6 h-6'
+                      />
                     </div>
                   </div>
                 </div>
@@ -66,7 +72,14 @@ export function SwapSection() {
                 />
                 <div className='flex flex-row absolute right-1 top-1 p-2'>
                   <div className='relative'>
-                    <img src='/sol.webp' className='w-6 h-6' />
+                    <img
+                      //   src={`https://backpack.exchange/coins/${
+                      //     market.split('_')[0]
+                      //   }.svg`}
+                      src={`https://backpack.exchange/coins/SOL.svg`}
+                      alt={`${market.split('_')[0]} logo`}
+                      className='w-6 h-6'
+                    />
                   </div>
                 </div>
               </div>
